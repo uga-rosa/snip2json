@@ -1,6 +1,6 @@
 # Copyright (c) 2015,2016,2017,2018,2019,2020,2021 Charles L. Blake.
 
-import os, strutils, sequtils, json
+import os, strutils, sequtils, json, re
 
 proc scanDir(path: string): seq[string] =
   toSeq(walkDir(path))
@@ -21,7 +21,7 @@ proc parseSnippet(lines: seq[string]): string =
 
   for line in lines:
     if line.startsWith(snippetStart):
-      prefix = line.split(' ')[1]
+      prefix = line.replace(re("^" & snippetStart & "\\s*"))
       snippets.add(prefix, %* {"prefix": [prefix]})
     elif line == snippetEnd:
       snippets[prefix].add("body", %* body)
