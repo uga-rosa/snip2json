@@ -34,15 +34,16 @@ proc parseSnippet(lines: seq[string]): string =
 
 proc snip2json(snipDir = "snip", jsonDir = "json"): int =
   let snipDirPath = snipDir.absolutePath
-  let jsonDirPath = jsonDir.absolutePath
-  jsonDirPath.createDir
   var files: seq[string]
 
-  try:
+  if snipDirPath.dirExists:
     files = snipDirPath.scanDir
-  except OSError:
+  else:
     echo "No such directory: ", snipDirPath
     return 1
+
+  let jsonDirPath = jsonDir.absolutePath
+  jsonDirPath.createDir
 
   for file in files:
     let name = file.splitPath[1].changeFileExt("json")
