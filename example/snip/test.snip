@@ -1,9 +1,21 @@
-snippet test
-hello! $1
+snippet hello
+hello world
 endsnippet
 
-snippet test2
-hello! ${1:name}
+snippet multiline
+line1
+line2
+line3
+endsnippet
 
-by
+snippet description "description text"
+description
+endsnippet
+
+snippet 'if else' "quote"
+if () {
+  $1
+} else {
+  $0
+}
 endsnippet

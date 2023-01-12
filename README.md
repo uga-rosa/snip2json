@@ -1,51 +1,30 @@
 # snip2json
 
-Convert simple syntax snippets to LSP format json.
+Convert ultisnips syntax snippets to LSP format json.
 
 # Usage
 
-Place `snip2json` under bin in a location with a path.
-Non-linux users should build it by themselves.
+You need to install Deno runtime.
+Add "path/to/snip2json/bin" to the user PATH.
 
 ```
-snip2json <option>
+snip2json.ts <option>
 ```
 
 Convert all files in the input directory.
 
 ## options
 
--s=, --snipDir=  
-  Set the input directory. Default: snip
+-s, --src  
+  Set the input directory. Required.
 
--j=, --jsonDir=  
+-t, --target
   Set the output directory. Default: json
 
--h, --help  
-  help message
+## runnable example
 
-# How to write snippet
-
-Write the `prefix` after the `snippet`. The body is from the line after `snippet` to the before `endsnippet`
+In this repository, there are example can be convert.
 
 ```
-snippet test
-hello! $1
-endsnippet
+snip2json.ts -s ./example/snip -t ./example/json
 ```
-
-Convert as following.
-```
-{
-  "test": {
-    "prefix": [
-      "test"
-    ],
-    "body": [
-      "hello! $1"
-    ]
-  }
-}
-```
-
-See also `./example`.
